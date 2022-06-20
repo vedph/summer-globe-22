@@ -1,0 +1,23 @@
+.container{
+  width: 100%;
+}
+.floated{
+  float: left;
+  width: 150px;
+  margin: 0 16px 0 8px;
+}
+.depiction {
+  max-width: 150px;
+}
+.short-field {
+  max-width: 6em;
+}
+agm-map {
+  height: 300px;
+}
+.hilite {
+  background-color: aliceblue;
+}
+table {
+  width: 100%;
+}

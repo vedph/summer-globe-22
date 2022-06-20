@@ -1,0 +1,14 @@
+.container{
+  width: 100%;
+}
+.floated{
+  float: left;
+  width: 150px;
+  margin: 0 16px 0 8px;
+}
+.depiction {
+  max-width: 150px;
+}
+.short-field {
+  max-width: 6em;
+}

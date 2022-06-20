@@ -1,0 +1,17 @@
+[
+  {
+    "type": "t",
+    "uri": "http://dbpedia.org/resource/Cilicia",
+    "label": "Cilicia"
+  },
+  {
+    "type": "t",
+    "uri": "http://dbpedia.org/resource/Constantinople",
+    "label": "Constantinople"
+  },
+  {
+    "type": "t",
+    "uri": "http://dbpedia.org/resource/Naples",
+    "label": "Naples"
+  }
+]

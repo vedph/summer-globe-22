@@ -1,0 +1,52 @@
+<div
+  style="width: 100%; height: 100%"
+  gdAreas="globe text | map info"
+  gdRows="800px 1fr"
+  gdColumns="800px 1fr"
+  gdGap="8px"
+  gdAreas.lt-md="globe | text | map | info"
+  gdRows.lt-md="600px 1fr 1fr 1fr"
+  gdColumns.lt-md="100%"
+>
+  <!-- globe -->
+  <div gdArea="globe">
+    <app-globe [markers]="markers"></app-globe>
+  </div>
+  <!-- text -->
+  <div gdArea="text" style="min-height: 300px; overflow: scroll">
+    <app-html-text
+      [html]="text"
+      (entityPick)="onTextEntityPick($event)"
+    ></app-html-text>
+  </div>
+  <!-- map -->
+  <div gdArea="map" style="max-height: 500px;min-height: 300px;">
+    <app-map [markers]="markers"></app-map>
+  </div>
+  <!-- info -->
+  <div gdArea="info" style="overflow: scroll">
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon [style.color]="cached ? '#3fb5a3' : '#703fb5'"
+            >place</mat-icon
+          >
+          &nbsp; places
+        </ng-template>
+        <app-place-list
+          [entities]="placeEntities"
+          (locateEntity)="onLocateEntity($event)"
+        ></app-place-list>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon [style.color]="cached ? '#3fb5a3' : '#703fb5'"
+            >account_circle</mat-icon
+          >
+          &nbsp; persons
+        </ng-template>
+        <app-person-list [entities]="personEntities"></app-person-list>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

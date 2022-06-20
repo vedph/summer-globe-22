@@ -1,0 +1,54 @@
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="form" (submit)="execute()">
+      <div>
+        <mat-form-field style="width: 100%;">
+          <textarea
+            placeholder="query"
+            matInput
+            [formControl]="queryCtl"
+            rows="12"
+            spellcheck="false"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        [disabled]="form.invalid || busy"
+      >
+        execute
+      </button>
+      <mat-spinner [diameter]="24" *ngIf="busy"></mat-spinner>
+    </form>
+    <br />
+    <div *ngIf="result">
+      <table *ngIf="result?.results?.bindings?.length">
+        <thead>
+          <th *ngFor="let v of result?.head?.vars">{{ v }}</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let b of result?.results?.bindings">
+            <td *ngFor="let v of result?.head?.vars" matTooltip="{{b[v]?.type}}">
+              <a
+                *ngIf="b[v]?.type === 'uri'"
+                href="b[v].value"
+                target="_blank"
+                >{{ b[v].value }}</a
+              >
+              <span *ngIf="b[v]?.type !== 'uri'">
+                {{
+                  b[v]?.value?.length || 0 > 20
+                    ? (b[v]?.value | slice: 0:20) + "..."
+                    : b[v]?.value
+                }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="!result?.results?.bindings?.length">no results</p>
+    </div>
+  </mat-card-content>
+</mat-card>

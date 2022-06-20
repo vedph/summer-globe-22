@@ -1,0 +1,118 @@
+<div>
+  <table>
+    <tbody>
+      <tr *ngFor="let e of entities">
+        <td>
+          <button
+            type="button"
+            mat-icon-button
+            color="primary"
+            matTooltip="Essential information about {{ e.label }}"
+            (click)="selectEntity(e)"
+          >
+            <mat-icon>info</mat-icon>
+          </button>
+          <a
+            type="button"
+            mat-icon-button
+            [href]="e.uri"
+            target="_blank"
+            matTooltip="Open DBPedia page"
+          >
+            <mat-icon>import_contacts</mat-icon>
+          </a>
+        </td>
+        <td>{{ e.label }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <mat-progress-bar mode="indeterminate" *ngIf="busy"></mat-progress-bar>
+
+  <mat-expansion-panel *ngIf="selectedEntity" [(expanded)]="infoExpanded">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h3>{{ selectedEntity?.label }}</h3>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-tab-group>
+      <mat-tab label="Info">
+        <form [formGroup]="form">
+          <div class="container">
+            <!-- depiction -->
+            <div class="floated" *ngIf="info?.depiction?.value">
+              <img
+                class="depiction"
+                alt="selectedEntry?.label"
+                [src]="info?.depiction?.value"
+              />
+            </div>
+            <!-- name(s) -->
+            <ul *ngIf="info?.names?.length">
+              <li *ngFor="let n of info?.names">
+                {{ n.value }} ({{ n["xml:lang"] }})
+              </li>
+            </ul>
+            <!-- birth -->
+            <ul>
+              <li *ngIf="info?.birthDate?.value">
+                birth:
+                <a
+                  *ngIf="info?.birthPlace?.type === 'uri'"
+                  target="_blank"
+                  [href]="info?.birthPlace?.value"
+                  >{{ info?.birthPlaceLabel?.value || info?.birthPlace?.value }}
+                </a>
+                <span *ngIf="info?.birthPlace?.type !== 'uri'"
+                  >{{ info?.birthPlaceLabel?.value || info?.birthPlace?.value }}
+                </span>
+                <span *ngIf="info?.birthDate?.value">{{
+                  info?.birthDate?.value
+                }}</span>
+              </li>
+              <!-- death -->
+              <li *ngIf="info?.deathDate?.value">
+                death:
+                <a
+                  *ngIf="info?.deathPlace?.type === 'uri'"
+                  target="_blank"
+                  [href]="info?.deathPlace?.value"
+                  >{{ info?.deathPlaceLabel?.value || info?.deathPlace?.value }}
+                </a>
+                <span *ngIf="info?.deathPlace?.type !== 'uri'"
+                  >{{ info?.deathPlaceLabel?.value || info?.deathPlace?.value }}
+                </span>
+                <span *ngIf="info?.deathDate?.value">{{
+                  info?.deathDate?.value
+                }}</span>
+                <span *ngIf="info?.birthDate && info?.deathDate">
+                  (aged {{ getAge(info?.birthDate, info?.deathDate) }})</span
+                >
+              </li>
+            </ul>
+            <!-- abstract -->
+            <div>
+              <mat-form-field class="short-field">
+                <mat-select
+                  placeholder="abstract language"
+                  [formControl]="language"
+                >
+                  <mat-option *ngFor="let l of languages" [value]="l">{{
+                    getLangName(l)
+                  }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <ng-container>{{ selectedAbstract }}</ng-container>
+          </div>
+          <!-- wiki link -->
+          <div *ngIf="info?.topic">
+            <a [href]="info?.topic?.value" target="_blank">Open Wikipedia</a>
+          </div>
+        </form>
+      </mat-tab>
+      <mat-tab label="Query">
+        <app-query [query]="lastQuery"></app-query>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+</div>

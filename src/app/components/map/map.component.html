@@ -1,0 +1,21 @@
+<mgl-map
+  [style]="'mapbox://styles/mapbox/streets-v11'"
+  [zoom]="[4]"
+  [center]="[23.7275, 37.9838]"
+  (mapLoad)="onMapLoad($event)"
+  (mapClick)="onMapClick($event)"
+  (render)="onRender($event)"
+>
+  <mgl-marker
+    id="result-pin-layer"
+    *ngFor="let feature of resultSource?.features"
+    [feature]="feature"
+  ></mgl-marker>
+  <mgl-layer
+    id="result-label-layer"
+    *ngIf="rawResultSource"
+    type="symbol"
+    [source]="rawResultSource"
+    [layout]="labelLayout"
+  ></mgl-layer>
+</mgl-map>
