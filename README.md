@@ -1,6 +1,7 @@
 # SummerGlobe
 
 - [SummerGlobe](#summerglobe)
+  - [Docker](#docker)
   - [Note](#note)
   - [Concept](#concept)
   - [History](#history)
@@ -9,7 +10,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 VeDPH Summer School 2022 proof of concept web app.
 
-Docker:
+## Docker
+
+Building image:
 
 1. ensure to set the right access tokens for Mapbox and Cesium in `environment.ts`.
 2. `ng build`.
@@ -17,6 +20,17 @@ Docker:
 
 ```bash
 docker build . -t vedph2020/summer-globe:0.0.2 -t vedph2020/summer-globe:latest
+```
+
+To use the image you can create a new `docker-compose.yml` file, paste the following content into it, and save it somewhere on your computer. Then, just open a terminal in its folder and run `docker compose up` (or `docker-compose up` if you are using the old composer). You will find the app with your browser at `http://localhost:4200`.
+
+```yml
+version: '3.7'
+services:
+  summer-globe:
+    image: vedph2020/summer-globe:0.0.2
+    ports:
+      - 4200:80
 ```
 
 ## Note
