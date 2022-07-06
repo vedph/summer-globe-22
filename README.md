@@ -80,4 +80,5 @@ So, not only the places extracted from the text annotations are listed here and 
 
 ## History
 
+- 2022-07-06: updated Angular.
 - 2022-06-20: upgraded to Angular 14.
