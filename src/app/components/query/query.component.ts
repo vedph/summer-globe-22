@@ -50,15 +50,15 @@ export class QueryComponent implements OnInit {
       return;
     }
     this.busy = true;
-    this._sparqlService.get(this.queryCtl.value!).subscribe(
-      (r: SparqlResult) => {
+    this._sparqlService.get(this.queryCtl.value!).subscribe({
+      next: (r: SparqlResult) => {
         this.busy = false;
         this.result = r;
       },
-      (error) => {
+      error: (error) => {
         this.busy = false;
         console.error(error);
-      }
-    );
+      },
+    });
   }
 }

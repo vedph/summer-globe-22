@@ -57,7 +57,8 @@ export class MapComponent implements OnInit {
           const pt = signal.entity?.point;
           if (pt) {
             this._map?.flyTo({
-              center: [pt.lat, pt.long],
+              // center: [pt.lat, pt.long],
+              center: [pt.long, pt.lat],
             });
           }
           break;

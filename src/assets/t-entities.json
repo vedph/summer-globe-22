@@ -1,17 +1,27 @@
 [
   {
     "type": "t",
-    "uri": "http://dbpedia.org/resource/Cilicia",
-    "label": "Cilicia"
-  },
-  {
-    "type": "t",
     "uri": "http://dbpedia.org/resource/Constantinople",
     "label": "Constantinople"
   },
   {
     "type": "t",
-    "uri": "http://dbpedia.org/resource/Naples",
-    "label": "Naples"
+    "uri": "http://dbpedia.org/resource/India",
+    "label": "India"
+  },
+  {
+    "type": "t",
+    "uri": "http://dbpedia.org/resource/Persian_Empire",
+    "label": "Persia"
+  },
+  {
+    "type": "t",
+    "uri": "http://dbpedia.org/resource/Sudak",
+    "label": "Sudak"
+  },
+  {
+    "type": "t",
+    "uri": "http://dbpedia.org/ontology/Venice",
+    "label": "Venice"
   }
 ]

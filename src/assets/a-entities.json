@@ -1,7 +1,27 @@
 [
   {
     "type": "a",
-    "uri": "http://dbpedia.org/resource/Crates_of_Mallus",
-    "label": "Crates of Mallus"
+    "uri": "http://dbpedia.org/resource/Adam",
+    "label": "Adam"
+  },
+  {
+    "type": "a",
+    "uri": "http://dbpedia.org/resource/Jesus",
+    "label": "Jesus"
+  },
+  {
+    "type": "a",
+    "uri": "http://dbpedia.org/resource/Kublai_Khan",
+    "label": "Kublai Khan"
+  },
+  {
+    "type": "a",
+    "uri": "http://dbpedia.org/ontology/Marco_Polo",
+    "label": "Marco Polo"
+  },
+  {
+    "type": "a",
+    "uri": "http://dbpedia.org/ontology/Niccolò_and_Maffeo_Polo",
+    "label": "Niccolò Polo"
   }
 ]

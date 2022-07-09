@@ -48,8 +48,13 @@ export class PersonService {
       ?death_date ?death_place ?death_place_label
       ?topic ?depiction ?abstract
     WHERE {
-      dbr:${id} a owl:Thing;
-        dbp:title ?name.
+      dbr:${id} a owl:Thing.
+      OPTIONAL {
+        dbr:${id} dbp:title ?name.
+      }
+      OPTIONAL {
+        dbr:${id} foaf:name ?name.
+      }
       OPTIONAL {
         dbr:${id} dbo:birthDate ?birth_date.
        }

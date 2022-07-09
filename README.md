@@ -5,6 +5,8 @@
   - [Note](#note)
   - [Concept](#concept)
   - [History](#history)
+    - [0.0.3](#003)
+    - [0.0.2](#002)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.6.
 
@@ -14,12 +16,12 @@ VeDPH Summer School 2022 proof of concept web app.
 
 Building image:
 
-1. ensure to set the right access tokens for Mapbox and Cesium in `environment.ts`.
+1. ensure to set the right _access tokens_ for Mapbox and Cesium in `environment.ts`.
 2. `ng build`.
 3. generate the image:
 
 ```bash
-docker build . -t vedph2020/summer-globe:0.0.2 -t vedph2020/summer-globe:latest
+docker build . -t vedph2020/summer-globe:0.0.3 -t vedph2020/summer-globe:latest
 ```
 
 To use the image you can create a new `docker-compose.yml` file, paste the following content into it, and save it somewhere on your computer. Then, just open a terminal in its folder and run `docker compose up` (or `docker-compose up` if you are using the old composer). You will find the app with your browser at `http://localhost:4200`.
@@ -28,7 +30,7 @@ To use the image you can create a new `docker-compose.yml` file, paste the follo
 version: '3.7'
 services:
   summer-globe:
-    image: vedph2020/summer-globe:0.0.2
+    image: vedph2020/summer-globe:0.0.3
     ports:
       - 4200:80
 ```
@@ -47,10 +49,10 @@ At this point, we'd like to introduce the very basics of databases and semantic 
 
 Given that it's very difficult to present LOD in a few minutes, probably here too a more effective approach can be provided by a real-world application of its essential principles. We could just let students add another layer of TEI annotations, just including DBPedia URIs; and then let them look at some magic where their data get presented to end users in a highly interactive way, enriched with a fully browsable 3D globe, a fully browsable 2D map, their rendered text, and the list of places and persons derived from it.
 
-The entry point to this app is an XSLT script used to generate HTML output. This among other things will produce a link for each annotated place or person in the text. The rendering process here adopts a convention by which any relevant entity must be encoded as an `a` element, whose `href` attribute starts with `t:` for toponyms or `a:` for anthroponyms, followed by the DBPedia URI of the entity, e.g.:
+The entry point to this app is an XSLT script used to generate HTML output. This among other things will produce a link for each annotated place or person in the text. The rendering process here adopts a convention by which any relevant entity must be encoded as an `a` element, whose `href` attribute starts with `t:` for toponyms or `a:` for anthroponyms, followed by a label, `:`, and the DBPedia URI of the entity, e.g.:
 
 ```html
-<a href="a:http://dbpedia.org/resource/Crates_of_Mallus">Crates of Mallus</a>
+<a href="a:Crates:http://dbpedia.org/resource/Crates_of_Mallus">Crates of Mallus</a>
 ```
 
 That's of course very raw, as we need to keep everything as simple as possible, but it's enough to build an application on top of it: a web application which can emphasize these concepts:
@@ -79,6 +81,17 @@ Also, we want to emphasize the fact that a digital publication is not just takin
 So, not only the places extracted from the text annotations are listed here and enriched with position and other information: they are also shown on the globe, and on the map. Users are free to explore, spin, zoom in and out, and see how their text takes life in the context of a digital product.
 
 ## History
+
+### 0.0.3
+
+- 2022-07-09:
+  - refactored to use ms text instead of sample text.
+  - added `tei` folder with TEI text and its transform script (just for reference).
+  - swap lat/long in mapboxgl `flyTo`.
+  - made `dbp:title` optional in person query, otherwise persons like Marco Polo were no more found.
+  - added link to open the [DBPedia SPARQL endpoint](https://dbpedia.org/sparql) in query pane.
+
+### 0.0.2
 
 - 2022-07-06: updated Angular.
 - 2022-06-20: upgraded to Angular 14.

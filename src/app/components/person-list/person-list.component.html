@@ -42,7 +42,7 @@
             <div class="floated" *ngIf="info?.depiction?.value">
               <img
                 class="depiction"
-                alt="selectedEntry?.label"
+                [alt]="selectedEntity?.label"
                 [src]="info?.depiction?.value"
               />
             </div>

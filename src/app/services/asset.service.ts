@@ -50,24 +50,25 @@ export class AssetService {
   public parseEntities(html: string): Entity[] {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
-    const entities: Entity[] = [];
-    const r = new RegExp('^([at]):(http.+)$');
+    const entities = new Map<string, Entity>();
+    // a: or t: + label + : + URI
+    const r = new RegExp('^([at]):([^:]+):(http.+)$');
 
     doc.body.querySelectorAll('a').forEach((a) => {
       const href = a.getAttribute('href');
       if (href) {
         const m = r.exec(href);
         if (m) {
-          entities.push({
+          entities.set(m[3], {
             type: m[1],
-            uri: m[2],
-            label: a.text?.trim(),
+            uri: decodeURI(m[3]),
+            label: decodeURI(m[2]),
           });
         }
       }
     });
 
-    return entities;
+    return Array.from(entities.values());
   }
 
   /**

@@ -5,11 +5,7 @@ import { RealiaService } from 'src/app/services/realia.service';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { AssetService } from 'src/app/services/asset.service';
 import { take } from 'rxjs/operators';
-import {
-  Signal,
-  SignalId,
-  SignalService,
-} from 'src/app/services/signal.service';
+import { SignalId, SignalService } from 'src/app/services/signal.service';
 
 @Component({
   selector: 'app-person-list',
@@ -27,7 +23,7 @@ export class PersonListComponent implements OnInit {
   public lastQuery: string | undefined;
   public info: PersonInfo | null;
   public languages: string[] | undefined;
-  public language: FormControl<string|null>;
+  public language: FormControl<string | null>;
   public form: FormGroup;
   public selectedAbstract: string | undefined;
 
@@ -90,8 +86,8 @@ export class PersonListComponent implements OnInit {
     this.lastQuery = this._personService.buildQuery(id);
 
     this.busy = true;
-    this._personService.getInfo(id).subscribe(
-      (i) => {
+    this._personService.getInfo(id).subscribe({
+      next: (i) => {
         this.busy = false;
         if (i) {
           this.info = i;
@@ -107,12 +103,12 @@ export class PersonListComponent implements OnInit {
           }
         }
       },
-      (error) => {
+      error: (error) => {
         this.busy = false;
         console.error('Error querying for ' + entity.uri);
         console.error(error);
-      }
-    );
+      },
+    });
   }
 
   public getYear(date: string): number {

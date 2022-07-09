@@ -5,11 +5,7 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { RealiaService } from 'src/app/services/realia.service';
 import { AssetService } from 'src/app/services/asset.service';
 import { take } from 'rxjs/operators';
-import {
-  Signal,
-  SignalId,
-  SignalService,
-} from 'src/app/services/signal.service';
+import { SignalId, SignalService } from 'src/app/services/signal.service';
 
 @Component({
   selector: 'app-place-list',
@@ -38,7 +34,7 @@ export class PlaceListComponent implements OnInit {
   public info: PlaceInfo | undefined;
 
   public languages: string[] | undefined;
-  public language: FormControl<string|null>;
+  public language: FormControl<string | null>;
   public abstractForm: FormGroup;
   public selectedAbstract: string | undefined;
 
@@ -124,8 +120,8 @@ export class PlaceListComponent implements OnInit {
     this._placeService
       .getInfo(id)
       .pipe(take(1))
-      .subscribe(
-        (i) => {
+      .subscribe({
+        next: (i) => {
           this.busy = false;
           if (!i) {
             return;
@@ -156,12 +152,12 @@ export class PlaceListComponent implements OnInit {
             }
           }
         },
-        (error) => {
+        error: (error) => {
           this.busy = false;
           console.error('Error querying for ' + entity.uri);
           console.error(error);
-        }
-      );
+        },
+      });
   }
 
   public getIdFromUri(uri: string): string {
