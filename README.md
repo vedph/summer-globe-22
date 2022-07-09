@@ -12,6 +12,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 VeDPH Summer School 2022 proof of concept web app.
 
+![summer globe](screenshot.png)
+
 ## Docker
 
 Building image:
@@ -33,6 +35,26 @@ services:
     image: vedph2020/summer-globe:0.0.3
     ports:
       - 4200:80
+```
+
+Deployment notice: the version of this script modified for its temporary hosting environment is here:
+
+```yml
+version: '3.7'
+services:
+  globe-app:
+    image: vedph2020/summer-globe:0.0.3
+    ports:
+      - 4202:80
+    environment:
+      - VIRTUAL_HOST=globe.fusi-soft.com
+      - LETSENCRYPT_HOST=globe.fusi-soft.com
+      - LETSENCRYPT_EMAIL=fusi.daniele@tiscali.it
+
+networks:
+  default:
+    external: true
+    name: nginx-proxy
 ```
 
 ## Note
